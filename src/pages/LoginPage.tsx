@@ -1,11 +1,13 @@
-import { Box, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
+
+import { UserLayout } from 'layouts/UserLayout';
 
 export const LoginPage = () => {
   return (
-    <Box>
+    <UserLayout>
       <Typography variant="h2" fontWeight="400">
         Test
       </Typography>
-    </Box>
+    </UserLayout>
   );
 };
