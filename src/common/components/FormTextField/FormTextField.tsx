@@ -1,13 +1,30 @@
-import { TextField } from '@mui/material';
+import { TextField, TextFieldProps, FormHelperText } from '@mui/material';
+import { useController } from 'react-hook-form';
 
-interface FormTextFieldProps {
+interface FormTextFieldProps extends Omit<TextFieldProps, 'onChange' | 'inputRef' | 'value' | 'error'> {
   name: string;
-  label: string;
-  type: string;
-  isError?: boolean;
-  placeholder?: string;
+  defaultValue?: string;
 }
 
-export const FormTextField = ({ name, label, type, isError, placeholder }: FormTextFieldProps) => {
-  return <TextField name={name} label={label} placeholder={placeholder} error={isError} type={type} />;
+export const FormTextField = ({ name, defaultValue, ...rest }: FormTextFieldProps) => {
+  const {
+    field: { ref, value, ...fieldProps },
+    fieldState: { error }
+  } = useController({
+    name,
+    defaultValue
+  });
+
+  return (
+    <TextField
+      {...rest}
+      {...fieldProps}
+      value={value}
+      inputRef={ref}
+      name={name}
+      error={!!error}
+      helperText={error?.message}
+      sx={{ width: '100%', '& .MuiOutlinedInput-input': { typography: 'subtitle1' } }}
+    />
+  );
 };
