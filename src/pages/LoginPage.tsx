@@ -4,9 +4,8 @@ import { SubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
 import { useUser } from 'state';
-import { Login } from 'features/login';
+import { Login, LoginFormData } from 'features';
 import { UserLayout } from 'layouts/UserLayout';
-import { LoginFormData } from 'features/login/types';
 import { RoutesDefinition } from 'routing/constants/RoutesDefinition';
 
 export const LoginPage = () => {
