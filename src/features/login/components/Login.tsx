@@ -1,7 +1,7 @@
 import { Grid, Typography } from '@mui/material';
 import { SubmitHandler } from 'react-hook-form';
 
-import { LoginFormData } from 'features/login/types';
+import { LoginFormData } from 'features';
 import { LoginForm } from './LoginForm';
 interface LoginFormProps {
   onSubmit: SubmitHandler<LoginFormData>;

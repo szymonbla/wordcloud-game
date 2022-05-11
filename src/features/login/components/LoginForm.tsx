@@ -3,7 +3,7 @@ import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { ButtonComponent, FormTextField } from 'common/components';
-import { LoginFormData, loginFormSchema } from 'features/login/types';
+import { LoginFormData, loginFormSchema } from 'features';
 
 interface LoginFormProps {
   onSubmit: SubmitHandler<LoginFormData>;

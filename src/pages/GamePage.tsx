@@ -1,7 +1,10 @@
-import { UserLayout } from 'layouts/UserLayout';
 import { useEffect } from 'react';
+
 import { useNavigate } from 'react-router-dom';
+
 import { RoutesDefinition } from 'routing/constants/RoutesDefinition';
+import { UserLayout } from 'layouts/UserLayout';
+import { Game } from 'features';
 import { useUser } from 'state';
 
 export const GamePage = () => {
@@ -17,7 +20,7 @@ export const GamePage = () => {
 
   return (
     <UserLayout>
-      <h2>test</h2>
+      <Game />
     </UserLayout>
   );
 };
