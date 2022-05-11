@@ -1,6 +1,7 @@
 import { ThemeProvider } from '@mui/material/styles';
 import { BrowserRouter as Router } from 'react-router-dom';
 
+import { UserContextProvider } from 'state';
 import Routing from 'routing/Routing';
 import theme from 'common/Theme';
 
@@ -10,7 +11,9 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <Routing />
+        <UserContextProvider>
+          <Routing />
+        </UserContextProvider>
       </Router>
     </ThemeProvider>
   );

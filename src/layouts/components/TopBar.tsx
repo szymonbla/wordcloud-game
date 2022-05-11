@@ -1,9 +1,12 @@
-import { Grid, Link, Typography } from '@mui/material';
+import { Box, Grid, Link, Typography } from '@mui/material';
 
 import { RoutesDefinition } from 'routing/constants/RoutesDefinition';
 import Logo from 'common/images/logo.png';
+import { useUser } from 'state';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 export const TopBar = () => {
+  const { nickname } = useUser();
   return (
     <Grid
       container
@@ -28,7 +31,8 @@ export const TopBar = () => {
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          textDecoration: 'none'
+          textDecoration: 'none',
+          position: 'relative'
         }}
       >
         <Grid
@@ -47,6 +51,25 @@ export const TopBar = () => {
           WordCloud
         </Typography>
       </Link>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          position: 'absolute',
+          right: '10%'
+        }}
+      >
+        {nickname && (
+          <>
+            <AccountCircleIcon sx={{ width: '2em', height: '2em' }} />
+            <Typography variant="subtitle1" fontWeight="600">
+              {nickname}
+            </Typography>
+          </>
+        )}
+      </Box>
     </Grid>
   );
 };
