@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
-import { Box } from '@mui/material';
 
-import { AnswerPill } from 'common/components';
+import { Grid } from '@mui/material';
+
+import { AnswerPillsWrapper, ButtonComponent } from 'common/components';
 import { mockConfig } from 'common/utils';
 import { MockConfigData } from 'common/types';
 
@@ -13,7 +14,7 @@ export const Game = () => {
   useEffect(() => {
     if (isMounted.current) return; // Due to the React 18 changes. https://reactjs.org/blog/2022/03/29/react-v18.html#new-strict-mode-behaviors
 
-    setQuestionListNumber(Number(Math.floor(0 + Math.random() * mockConfig.length)));
+    setQuestionListNumber(Math.floor(0 + Math.random() * mockConfig.length));
     isMounted.current = true;
   }, []);
 
@@ -30,15 +31,11 @@ export const Game = () => {
   }, [questionListNumber]);
 
   return (
-    <Box>
-      {questionList.map(({ all_words, good_words }) =>
-        all_words.map((word, index) => {
-          if (good_words.some((goodWord) => goodWord === word)) {
-            return <AnswerPill label={word} valid={true} key={index} />;
-          }
-          return <AnswerPill label={word} valid={false} key={index} />;
-        })
-      )}
-    </Box>
+    <>
+      <Grid container sx={{ width: '50%', height: '50%' }}>
+        <AnswerPillsWrapper questionList={questionList} />
+      </Grid>
+      <ButtonComponent label="Check answers" sx={{ width: '20%' }} />
+    </>
   );
 };
