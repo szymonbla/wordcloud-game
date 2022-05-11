@@ -1,2 +1,2 @@
-export * from './Input';
+export * from './FormTextField';
 export * from './ButtonComponent';
