@@ -26,25 +26,36 @@ export const AnswerPillsWrapper = ({
 
   return (
     <Grid
-      sx={{
+      sx={(theme) => ({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        width: '100%',
-        height: '100%'
-      }}
+        width: '70%',
+        height: '60%',
+        [theme.breakpoints.down('md')]: {
+          justifyContent: 'space-evenly',
+          width: '100%',
+          height: '80%'
+        }
+      })}
     >
-      <Typography variant="h3">{questionList && questionList.sectionQuestion.toUpperCase()}</Typography>
+      <Typography variant="h3" sx={{ mb: 4 }}>
+        {questionList && questionList.sectionQuestion.toUpperCase()}
+      </Typography>
       <Grid
         container
-        sx={{
+        sx={(theme) => ({
           width: '100%',
           height: '100%',
           flexWrap: 'wrap',
           justifyContent: 'center',
-          alignContent: 'space-evenly'
-        }}
+          alignContent: 'space-evenly',
+          [theme.breakpoints.down('md')]: {
+            height: '85%',
+            overflow: 'scroll'
+          }
+        })}
         spacing={6}
       >
         {questionList &&

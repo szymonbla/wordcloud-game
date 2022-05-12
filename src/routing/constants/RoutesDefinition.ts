@@ -1,5 +1,5 @@
 export enum RoutesDefinition {
-  login = '/',
+  login = '/wordcloud-game',
   game = '/game',
   result = '/result'
 }

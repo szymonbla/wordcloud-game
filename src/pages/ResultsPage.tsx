@@ -28,7 +28,7 @@ export const ResultsPage = () => {
         <ButtonComponent
           label="Restart game"
           handleClick={handleRestart}
-          sx={{ width: '15%', backgroundColor: 'error.main' }}
+          sx={{ width: '30%', backgroundColor: 'error.main' }}
         />
       </Grid>
     </UserLayout>

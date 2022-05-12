@@ -22,15 +22,45 @@ export const TopBar = () => {
       justifyContent="center"
       alignItems="center"
       sx={{
-        position: 'absolute',
-        top: 0,
         backgroundColor: 'grey.400',
         width: '100%',
         borderBottom: '1px solid',
         borderColor: 'grey.600',
-        py: 2
+        py: 2,
+        maxHeight: '130px'
       }}
     >
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          position: 'absolute',
+          left: '5%',
+          '& > div': {
+            mr: 2
+          }
+        }}
+      >
+        {nickname && (
+          <>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                flexDirection: 'column'
+              }}
+            >
+              <AccountCircleIcon sx={{ width: '2em', height: '2em' }} />
+              <Typography variant="subtitle1" fontWeight="600">
+                {nickname}
+              </Typography>
+            </Box>
+          </>
+        )}
+      </Box>
+
       <Link
         href={RoutesDefinition.login}
         title="WordCloud logo"
@@ -40,8 +70,7 @@ export const TopBar = () => {
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          textDecoration: 'none',
-          position: 'relative'
+          textDecoration: 'none'
         }}
       >
         <Grid
@@ -66,7 +95,7 @@ export const TopBar = () => {
           justifyContent: 'center',
           alignItems: 'center',
           position: 'absolute',
-          right: '10%',
+          right: '5%',
           '& > div': {
             mr: 2
           }
@@ -74,19 +103,6 @@ export const TopBar = () => {
       >
         {nickname && (
           <>
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                flexDirection: 'column'
-              }}
-            >
-              <AccountCircleIcon sx={{ width: '2em', height: '2em' }} />
-              <Typography variant="subtitle1" fontWeight="600">
-                {nickname}
-              </Typography>
-            </Box>
             <ButtonComponent label="Logout" handleClick={handleLogout} sx={{ backgroundColor: 'warning.main' }} />
           </>
         )}
