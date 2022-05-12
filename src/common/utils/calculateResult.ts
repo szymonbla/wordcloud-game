@@ -20,7 +20,7 @@ export const calculateScore = (allQuestions: SectionListData, selectedAnswers: A
     }
   });
 
-  finalScore = correctSelected * 2 - (incorrectSelected + correctUnselected);
+  finalScore = 2 * correctSelected - (incorrectSelected + correctUnselected);
 
   return finalScore;
 };
