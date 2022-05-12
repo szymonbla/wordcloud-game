@@ -1,23 +1,32 @@
 import { ReactNode } from 'react';
 
-import { Grid } from '@mui/material';
+import { Grid, SxProps } from '@mui/material';
 
 import { TopBar } from 'layouts/components';
 interface UserLayoutProps {
   children: ReactNode;
+  sx?: SxProps;
 }
 
-export const UserLayout = ({ children }: UserLayoutProps) => {
+export const UserLayout = ({ children, sx }: UserLayoutProps) => {
   return (
     <Grid
       container
       flexDirection="column"
-      alignItems="center"
-      justifyContent="center"
-      sx={{ width: '100vw', height: '100vh', position: 'relative' }}
+      sx={{ width: '100vw', height: '100vh', position: 'relative', overflowY: 'scroll', ...sx }}
     >
       <TopBar />
-      {children}
+      <Grid
+        sx={{
+          height: 'calc(100% - 130px)',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
+      >
+        {children}
+      </Grid>
     </Grid>
   );
 };

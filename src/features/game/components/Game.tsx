@@ -1,7 +1,5 @@
 import { Dispatch } from 'react';
 
-import { Grid } from '@mui/material';
-
 import { useGame } from 'state';
 import { AnswerPillsWrapper, ButtonComponent } from 'common/components';
 import { AnswerProps, SectionListData } from 'common/types';
@@ -18,17 +16,15 @@ export const Game = ({ questionList, handleSubmit, setUserSelectedAnswers, userS
 
   return (
     <>
-      <Grid container sx={{ width: '50%', height: '50%' }}>
-        <AnswerPillsWrapper
-          questionList={questionList}
-          setUserSelectedAnswers={setUserSelectedAnswers}
-          userSelectedAnswers={userSelectedAnswers}
-        />
-      </Grid>
+      <AnswerPillsWrapper
+        questionList={questionList}
+        setUserSelectedAnswers={setUserSelectedAnswers}
+        userSelectedAnswers={userSelectedAnswers}
+      />
       <ButtonComponent
         label={isSubmitted ? 'Finish Game' : 'Check answers'}
         handleClick={handleSubmit}
-        sx={{ width: '20%' }}
+        sx={{ width: '30%', mt: 4 }}
       />
     </>
   );
