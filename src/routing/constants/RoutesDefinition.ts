@@ -1,4 +1,5 @@
 export enum RoutesDefinition {
   login = '/',
-  game = '/game'
+  game = '/game',
+  result = '/result'
 }

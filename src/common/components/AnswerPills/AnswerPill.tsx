@@ -2,15 +2,18 @@ import { useState } from 'react';
 
 import { Chip } from '@mui/material';
 
+import { AnswerProps } from 'common/types';
 interface AnswerPillProps {
   label: string;
   valid: boolean;
+  handleClick: ({ label, valid }: AnswerProps) => void;
 }
 
-export const AnswerPill = ({ label }: AnswerPillProps) => {
+export const AnswerPill = ({ label, valid, handleClick }: AnswerPillProps) => {
   const [selected, setSelected] = useState<boolean>(false);
 
-  const handleClick = () => {
+  const handlePillSelection = () => {
+    handleClick({ label, valid });
     setSelected(!selected);
   };
 
@@ -18,7 +21,7 @@ export const AnswerPill = ({ label }: AnswerPillProps) => {
     <Chip
       label={label}
       variant={selected ? 'filled' : 'outlined'}
-      onClick={handleClick}
+      onClick={handlePillSelection}
       sx={{
         typography: 'subtitle1',
         p: 3,
