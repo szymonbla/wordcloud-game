@@ -2,15 +2,17 @@ import { Button, SxProps } from '@mui/material';
 
 interface ButtonProps {
   label: string;
+  handleClick?: () => void;
   isProcessing?: boolean;
   sx?: SxProps;
 }
 
-export const ButtonComponent = ({ label, isProcessing, sx }: ButtonProps) => {
+export const ButtonComponent = ({ label, handleClick, isProcessing, sx }: ButtonProps) => {
   return (
     <Button
       disabled={isProcessing}
       type="submit"
+      onClick={handleClick}
       sx={{
         width: '100%',
         typography: 'body1',

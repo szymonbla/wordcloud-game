@@ -1,41 +1,35 @@
-import { useState, useEffect, useRef } from 'react';
+import { Dispatch } from 'react';
 
 import { Grid } from '@mui/material';
 
 import { AnswerPillsWrapper, ButtonComponent } from 'common/components';
-import { mockConfig } from 'common/utils';
-import { MockConfigData } from 'common/types';
+import { AnswerProps, SectionListData } from 'common/types';
+import { useGame } from 'state';
 
-export const Game = () => {
-  const [questionList, setQuestionList] = useState<MockConfigData[]>([{ all_words: [], good_words: [], question: '' }]);
-  const [questionListNumber, setQuestionListNumber] = useState<number | undefined>(undefined);
-  const isMounted = useRef<boolean>();
+interface GameProps {
+  questionList: SectionListData;
+  handleSubmit: () => void;
+  setUserSelectedAnswers: Dispatch<React.SetStateAction<AnswerProps[]>>;
+  userSelectedAnswers: AnswerProps[];
+}
 
-  useEffect(() => {
-    if (isMounted.current) return; // Due to the React 18 changes. https://reactjs.org/blog/2022/03/29/react-v18.html#new-strict-mode-behaviors
-
-    setQuestionListNumber(Math.floor(0 + Math.random() * mockConfig.length));
-    isMounted.current = true;
-  }, []);
-
-  useEffect(() => {
-    if (typeof questionListNumber !== 'undefined') {
-      setQuestionList([
-        {
-          all_words: mockConfig[questionListNumber].all_words,
-          good_words: mockConfig[questionListNumber].good_words,
-          question: mockConfig[questionListNumber].question
-        }
-      ]);
-    }
-  }, [questionListNumber]);
+export const Game = ({ questionList, handleSubmit, setUserSelectedAnswers, userSelectedAnswers }: GameProps) => {
+  const { isSubmitted } = useGame();
 
   return (
     <>
       <Grid container sx={{ width: '50%', height: '50%' }}>
-        <AnswerPillsWrapper questionList={questionList} />
+        <AnswerPillsWrapper
+          questionList={questionList}
+          setUserSelectedAnswers={setUserSelectedAnswers}
+          userSelectedAnswers={userSelectedAnswers}
+        />
       </Grid>
-      <ButtonComponent label="Check answers" sx={{ width: '20%' }} />
+      <ButtonComponent
+        label={isSubmitted ? 'Finish Game' : 'Check answers'}
+        handleClick={handleSubmit}
+        sx={{ width: '20%' }}
+      />
     </>
   );
 };

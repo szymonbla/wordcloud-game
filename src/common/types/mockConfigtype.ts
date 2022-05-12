@@ -1,5 +1,9 @@
-export interface MockConfigData {
-  question: string;
-  all_words: string[];
-  good_words: string[];
+export interface SectionListData {
+  sectionQuestion: string;
+  questions: AnswerProps[];
+}
+
+export interface AnswerProps {
+  label: string;
+  valid: boolean;
 }

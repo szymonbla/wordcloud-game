@@ -1,59 +1,59 @@
+import { Dispatch } from 'react';
+
 import { Grid, Typography } from '@mui/material';
 
-import { MockConfigData } from 'common/types';
+import { AnswerProps, SectionListData } from 'common/types';
 import { AnswerPill } from './AnswerPill';
 
 interface AnswerPillsWrapperProps {
-  questionList: MockConfigData[];
+  questionList: SectionListData;
+  setUserSelectedAnswers: Dispatch<React.SetStateAction<AnswerProps[]>>;
+  userSelectedAnswers: AnswerProps[];
 }
 
-export const AnswerPillsWrapper = ({ questionList }: AnswerPillsWrapperProps) => {
+export const AnswerPillsWrapper = ({
+  questionList,
+  setUserSelectedAnswers,
+  userSelectedAnswers
+}: AnswerPillsWrapperProps) => {
+  const handleUserSelection = ({ label, valid }: AnswerProps) => {
+    if (userSelectedAnswers.some((userSelectedAnswer) => userSelectedAnswer.label === label)) {
+      setUserSelectedAnswers(userSelectedAnswers.filter((userSelectedAnswer) => userSelectedAnswer.label !== label));
+    } else {
+      setUserSelectedAnswers((prevUserSelectedAnswers) => [...prevUserSelectedAnswers, { label, valid }]);
+    }
+  };
+
   return (
-    <>
-      {questionList &&
-        questionList.map(({ all_words, good_words, question }, indexMain) => {
-          return (
-            <Grid
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                width: '100%',
-                height: '100%'
-              }}
-              key={indexMain}
-            >
-              <Typography variant="h3">{question.toUpperCase()}</Typography>
-              <Grid
-                container
-                sx={{
-                  width: '100%',
-                  height: '100%',
-                  flexWrap: 'wrap',
-                  justifyContent: 'center',
-                  alignContent: 'space-evenly'
-                }}
-                spacing={6}
-              >
-                {all_words.map((word, index) => {
-                  if (good_words.some((goodWord) => goodWord === word)) {
-                    return (
-                      <Grid item key={index}>
-                        <AnswerPill label={word} valid={true} />
-                      </Grid>
-                    );
-                  }
-                  return (
-                    <Grid item key={index}>
-                      <AnswerPill label={word} valid={true} />
-                    </Grid>
-                  );
-                })}
-              </Grid>
+    <Grid
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        height: '100%'
+      }}
+    >
+      <Typography variant="h3">{questionList && questionList.sectionQuestion.toUpperCase()}</Typography>
+      <Grid
+        container
+        sx={{
+          width: '100%',
+          height: '100%',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          alignContent: 'space-evenly'
+        }}
+        spacing={6}
+      >
+        {questionList &&
+          questionList.questions.map(({ label, valid }, index) => (
+            <Grid item key={index}>
+              <AnswerPill label={label} valid={valid} handleClick={() => handleUserSelection({ label, valid })} />
             </Grid>
-          );
-        })}
-    </>
+          ))}
+      </Grid>
+    </Grid>
   );
 };
