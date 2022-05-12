@@ -2,9 +2,9 @@ import { Dispatch } from 'react';
 
 import { Grid } from '@mui/material';
 
+import { useGame } from 'state';
 import { AnswerPillsWrapper, ButtonComponent } from 'common/components';
 import { AnswerProps, SectionListData } from 'common/types';
-import { useGame } from 'state';
 
 interface GameProps {
   questionList: SectionListData;
